@@ -1,38 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieList from "./components/MovieList";
 
 function App() {
-  const [movies, setMovies] = useState([
-    {
-      Title: "White Chicks",
-      Year: "2004",
-      imdbID: "tt0381707",
-      Type: "movie",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BMTY3OTg2OTM3OV5BMl5BanBnXkFtZTYwNzY5OTA3._V1_SX300.jpg",
-    },
-    {
-      Title: "Chicks in White Satin",
-      Year: "1993",
-      imdbID: "tt0106555",
-      Type: "movie",
-      Poster: "N/A",
-    },
-    {
-      Title: "A Couple of White Chicks at the Hairdresser",
-      Year: "2007",
-      imdbID: "tt0965369",
-      Type: "movie",
-      Poster: "N/A",
-    },
-  ]);
+  const [movies, setMovies] = useState([]);
 
-  axios.get("");
+  const getMovies = () => {
+    axios
+      .get("http://www.omdbapi.com/?s=white chicks&apikey=c8f1c5a7")
+      .then((res) => {
+        console.log(res);
+        setMovies(res.data.Search);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getMovies();
+  }, []);
   return (
-    <div>
-      <MovieList movies={movies} />
+    <div className="container-fluid movie-app">
+      <div className="row">
+        <MovieList movies={movies} />
+      </div>
     </div>
   );
 }
