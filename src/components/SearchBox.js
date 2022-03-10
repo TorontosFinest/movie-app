@@ -7,6 +7,8 @@ export default function SearchBox(props) {
         type="text"
         className="form-control"
         placeholder="Search for a movie..."
+        value={props.value}
+        onChange={(e) => props.setSearchValue(e.target.value)}
       />
     </div>
   );

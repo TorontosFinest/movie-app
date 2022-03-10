@@ -9,12 +9,14 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  const getMovies = () => {
+  const getMovies = (searchValue) => {
     axios
-      .get("http://www.omdbapi.com/?s=white chicks&apikey=c8f1c5a7")
+      .get(`http://www.omdbapi.com/?s=${searchValue}&apikey=c8f1c5a7`)
       .then((res) => {
         console.log(res);
-        setMovies(res.data.Search);
+        if (res.data.Search) {
+          setMovies(res.data.Search);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -22,15 +24,15 @@ function App() {
   };
 
   useEffect(() => {
-    getMovies();
-  }, []);
+    getMovies(searchValue);
+  }, [searchValue]);
   return (
     <div className="container-fluid movie-app">
-      <div className="row">
+      <div className=" d-flex align-items-center mt-4 mb-4">
         <MovieListHeading heading="Movies" />
-        <SearchBox />
+        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="row">
+      <div className="new-container">
         <MovieList movies={movies} />
       </div>
     </div>
