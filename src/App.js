@@ -3,9 +3,11 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieList from "./components/MovieList";
-
+import MovieListHeading from "./components/MovieListHeading";
+import SearchBox from "./components/SearchBox";
 function App() {
   const [movies, setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   const getMovies = () => {
     axios
@@ -24,6 +26,10 @@ function App() {
   }, []);
   return (
     <div className="container-fluid movie-app">
+      <div className="row">
+        <MovieListHeading heading="Movies" />
+        <SearchBox />
+      </div>
       <div className="row">
         <MovieList movies={movies} />
       </div>
