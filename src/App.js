@@ -29,6 +29,7 @@ function App() {
   const addFavouriteMovie = (movie) => {
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   const removeFavouriteMovie = (movie) => {
@@ -37,11 +38,26 @@ function App() {
     );
 
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   useEffect(() => {
     getMovies(searchValue);
   }, [searchValue]);
+
+  useEffect(() => {
+    const movieFavourites = JSON.parse(
+      localStorage.getItem("react-movie-app-favourites")
+    );
+
+    if (movieFavourites) {
+      setFavourites(movieFavourites);
+    }
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("react-movie-app-favourites", JSON.stringify(items));
+  };
   return (
     <div className="container-fluid movie-app">
       <div className=" d-flex align-items-center mt-4 mb-4">
