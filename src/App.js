@@ -9,6 +9,7 @@ import AddFavourites from "./components/AddFavourites";
 function App() {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [favourites, setFavourites] = useState([]);
 
   const getMovies = (searchValue) => {
     axios
@@ -24,6 +25,11 @@ function App() {
       });
   };
 
+  const addFavouriteMovie = (movie) => {
+    const newFavouriteList = [...favourites, movie];
+    setFavourites(newFavouriteList);
+  };
+
   useEffect(() => {
     getMovies(searchValue);
   }, [searchValue]);
@@ -34,7 +40,21 @@ function App() {
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="new-container">
-        <MovieList movies={movies} favouriteComponent={AddFavourites} />
+        <MovieList
+          movies={movies}
+          favouriteComponent={AddFavourites}
+          handleFavouritesClick={addFavouriteMovie}
+        />
+      </div>
+      <div className=" d-flex align-items-center mt-4 mb-4">
+        <MovieListHeading heading="Favourites" />
+      </div>
+      <div className="new-container">
+        <MovieList
+          movies={favourites}
+          favouriteComponent={AddFavourites}
+          handleFavouritesClick={addFavouriteMovie}
+        />
       </div>
     </div>
   );
