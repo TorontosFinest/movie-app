@@ -4,8 +4,10 @@ Movie-App is a web app created using React, Node, and Axios. Visitors are able t
 
 ## Add movie to Favourites
 
-![add movie](https://i.gyazo.com/97209b8b5ca402a14db11b6fe0bc0dc1.gif)
+![add movie](https://github.com/TorontosFinest/movie-app/blob/master/docs/movie2.gif?raw=true)
+
++<img src>
 
 ## Remove movie from Favourites
 
-![remove movie](https://i.gyazo.com/34f50d261290f125e92da89a93ffc595.gif)
+![remove movie](https://github.com/TorontosFinest/movie-app/blob/master/docs/movie1.gif?raw=true)
